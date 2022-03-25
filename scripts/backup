@@ -1,0 +1,21 @@
+#! /usr/bin/env python3
+import rospy
+import os
+
+from table_cleaner.move_arm import move_arm_client
+from table_cleaner.base import move_base_client, dock_on_table
+
+
+if __name__ == '__main__':
+    rospy.init_node('table_cleaner')
+    rospy.loginfo("Hello Table")
+    move_base_client()
+    dock_on_table(-1.0)
+    move_arm_client()
+    dock_on_table(1.0)
+    rospy.loginfo("table clean!")
+
+    # 1. Drive to table
+    # 2. Dock to table for 'fine' positioning
+    # 3. Move arm into 'wiper' position
+    # 4. Dock to other side of table
